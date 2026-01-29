@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { ArrowRight, Heart, Users, BookOpen, Shield, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 
-const HERO_POSTER = "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1600&auto=format&fit=crop";
+const HERO_POSTER = "/hero-video.mp";
 
 const fadeInUp: any = {
   hidden: { opacity: 0, y: 30 },
