@@ -25,6 +25,7 @@ export default function Navbar() {
     { href: "/about", label: t("nav_about") },
     { href: "/mission-vision", label: t("nav_mission") },
     { href: "/projects", label: t("nav_projects") },
+    { href: "/wos-gebeya", label: t("nav_wos_gebeya") },
     { href: "/contact", label: t("nav_contact") },
   ];
 

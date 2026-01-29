@@ -12,7 +12,7 @@ export default function Programs() {
       title: t("child_protection"),
       desc: t("child_protection_desc"),
       gradient: "from-emerald-400 to-teal-500",
-      img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=600"
+      img: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=600"
     },
     {
       title: t("mother_health"),
@@ -30,7 +30,7 @@ export default function Programs() {
       title: t("food_nutrition"),
       desc: t("food_nutrition_desc"),
       gradient: "from-green-400 to-emerald-600",
-      img: "https://images.unsplash.com/photo-1608686150242-421712a95c93?auto=format&fit=crop&q=80&w=600"
+      img: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=600"
     },
     {
       title: t("emergency_response"),

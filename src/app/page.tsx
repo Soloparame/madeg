@@ -1,8 +1,11 @@
 'use client';
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
-import { ArrowRight, Heart, Users, BookOpen, Shield, Home as HomeIcon } from "lucide-react";
+import { ArrowRight, Heart, Users, BookOpen, Shield, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+
+const HERO_POSTER = "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1600&auto=format&fit=crop";
 
 const fadeInUp: any = {
   hidden: { opacity: 0, y: 30 },
@@ -19,8 +22,18 @@ const staggerContainer: any = {
   }
 };
 
+const CAROUSEL_SLIDES = 7;
+const CAROUSEL_KEYS = ["carousel_caption_1", "carousel_caption_2", "carousel_caption_3", "carousel_caption_4", "carousel_caption_5", "carousel_caption_6", "carousel_caption_7"] as const;
+
 export default function Home() {
   const { t } = useI18n();
+  const [videoError, setVideoError] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setCarouselIndex((i) => (i + 1) % CAROUSEL_SLIDES), 6000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <div className="overflow-hidden">
@@ -64,17 +77,6 @@ export default function Home() {
                 </Link>
               </motion.div>
 
-              <motion.div variants={fadeInUp} className="mt-12 flex items-center gap-8">
-                <div>
-                  <p className="text-3xl font-bold text-charcoal">12k+</p>
-                  <p className="text-sm text-slate-500">{t("lives_impacted")}</p>
-                </div>
-                <div className="w-px h-10 bg-slate-200" />
-                <div>
-                  <p className="text-3xl font-bold text-charcoal">120+</p>
-                  <p className="text-sm text-slate-500">{t("communities")}</p>
-                </div>
-              </motion.div>
             </motion.div>
 
             <motion.div
@@ -84,12 +86,29 @@ export default function Home() {
               className="relative"
             >
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shadow-primary/20">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
-                <img
-                  src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1600&auto=format&fit=crop"
-                  alt="Ethiopian children smiling"
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
+                {/* Hero video – add your video file as public/hero-video.mp4 (or .webm) */}
+                {!videoError ? (
+                  <video
+                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    poster={HERO_POSTER}
+                    aria-label="MADEG empowering women and children"
+                    onError={() => setVideoError(true)}
+                  >
+                    <source src="/hero-video.mp4" type="video/mp4" />
+                    <source src="/hero-video.webm" type="video/webm" />
+                  </video>
+                ) : (
+                  <img
+                    src={HERO_POSTER}
+                    alt="Ethiopian children smiling"
+                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                  />
+                )}
               </div>
 
               {/* Floating Card */}
@@ -108,6 +127,81 @@ export default function Home() {
                 </div>
               </motion.div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Image Carousel – after header */}
+      <section className="relative py-16 lg:py-24 bg-slate-900 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue/10 rounded-full blur-3xl" />
+        </div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-10">
+            <span className="text-primary font-bold tracking-widest uppercase text-sm">Our Impact</span>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white mt-2">Stories from the Children&apos;s Growing Center</h2>
+          </div>
+          <div className="relative max-w-4xl mx-auto">
+            <div className="relative aspect-[2/1] max-h-[380px] rounded-2xl overflow-hidden shadow-2xl ring-2 ring-white/10">
+              <AnimatePresence mode="wait">
+                {Array.from({ length: CAROUSEL_SLIDES }).map((_, i) =>
+                  i === carouselIndex ? (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute inset-0 group"
+                    >
+                      <div className="absolute inset-0 overflow-hidden">
+                        <img
+                          src={`/carousel/carousel-${i + 1}.png`}
+                          alt=""
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-left">
+                        <p className="text-white/95 text-sm md:text-base leading-relaxed max-w-3xl drop-shadow-lg">
+                          {t(CAROUSEL_KEYS[i])}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ) : null
+                )}
+              </AnimatePresence>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCarouselIndex((i) => (i - 1 + CAROUSEL_SLIDES) % CAROUSEL_SLIDES)}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-charcoal shadow-lg flex items-center justify-center hover:bg-white transition-colors z-20"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setCarouselIndex((i) => (i + 1) % CAROUSEL_SLIDES)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-charcoal shadow-lg flex items-center justify-center hover:bg-white transition-colors z-20"
+              aria-label="Next slide"
+            >
+              <ChevronRight size={24} />
+            </button>
+            <div className="flex justify-center gap-2 mt-4">
+              {Array.from({ length: CAROUSEL_SLIDES }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setCarouselIndex(i)}
+                  className={`h-2 rounded-full transition-all ${
+                    i === carouselIndex ? "w-8 bg-primary" : "w-2 bg-white/50 hover:bg-white/70"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -154,10 +248,10 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: t("healthcare"), img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600" },
-              { title: t("education"), img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600" },
-              { title: t("nutrition"), img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=600" },
-              { title: t("emergency"), img: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=600" },
+              { title: t("healthcare"), img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600", desc: t("program_desc").replace("{program}", "healthcare") },
+              { title: t("skills"), img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600", desc: t("skills_desc") },
+              { title: t("nutrition"), img: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=600", desc: t("program_desc").replace("{program}", "nutrition") },
+              { title: t("emergency"), img: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=600", desc: t("program_desc").replace("{program}", "emergency") },
             ].map((prog, idx) => (
               <motion.div
                 key={idx}
@@ -172,7 +266,7 @@ export default function Home() {
                 <div className="absolute bottom-0 left-0 p-6">
                   <h3 className="text-xl font-bold text-white mb-1">{prog.title}</h3>
                   <p className="text-white/80 text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all">
-                    {t("program_desc").replace("{program}", prog.title.toLowerCase())}
+                    {prog.desc}
                   </p>
                 </div>
               </motion.div>
@@ -207,25 +301,56 @@ export default function Home() {
               { name: "Hanna", role: "Mother Beneficiary", quote: "The support saved my child’s life. I am forever grateful." },
               { name: "Abel", role: "Student", quote: "Now I can go to school with confidence and materials." },
               { name: "Sister Mary", role: "Community Leader", quote: "MADEG brings hope to our village where there was none." },
-            ].map((t, i) => (
+            ].map((testimonial, i) => (
               <motion.div
                 key={i}
                 className="bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/40 border-t-4 border-primary relative"
                 whileHover={{ y: -5 }}
               >
                 <div className="absolute -top-4 right-6 text-6xl text-slate-100 font-serif leading-none">”</div>
-                <p className="text-slate-700 italic mb-6 relative z-10">"{t.quote}"</p>
+                <p className="text-slate-700 italic mb-6 relative z-10">"{testimonial.quote}"</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">
-                    {t.name[0]}
+                    {testimonial.name[0]}
                   </div>
                   <div>
-                    <p className="font-bold text-charcoal">{t.name}</p>
-                    <p className="text-xs text-slate-500 uppercase tracking-wide">{t.role}</p>
+                    <p className="font-bold text-charcoal">{testimonial.name}</p>
+                    <p className="text-xs text-slate-500 uppercase tracking-wide">{testimonial.role}</p>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Wos Gebeya – small section */}
+      <section className="section bg-slate-50/50 relative overflow-hidden">
+        <div className="absolute top-1/2 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="glass-card p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8 border border-primary/10">
+            <div className="flex-1">
+              <span className="text-primary font-bold tracking-widest uppercase text-sm">{t("wos_gebeya_heading")}</span>
+              <p className="text-slate-600 mt-2 text-lg leading-relaxed max-w-2xl">
+                {t("wos_gebeya_desc")}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-4">
+                <Link
+                  href="https://wosgebeya.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 btn btn-primary"
+                >
+                  {t("wos_gebeya_cta")} <ExternalLink size={18} />
+                </Link>
+                <Link
+                  href="/wos-gebeya"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-dark transition-colors"
+                >
+                  {t("learn_more")} <ArrowRight size={18} />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

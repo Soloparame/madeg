@@ -51,8 +51,8 @@ export default function About() {
               </div>
               <div className="relative h-64 md:h-full min-h-[300px] rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=800"
-                  alt="Women Empowerment"
+                  src="/about-image.png"
+                  alt="Mothers and children in Ethiopia"
                   className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>

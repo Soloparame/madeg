@@ -8,7 +8,7 @@ const images = [
   { src: "https://images.unsplash.com/photo-1488521786911-1e51b1e53a14?q=80&w=1200&auto=format&fit=crop", alt: "School children learning" },
   { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop", alt: "Community care in action" },
   { src: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1200&auto=format&fit=crop", alt: "Emergency response team" },
-  { src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop", alt: "Nutrition support distribution" },
+  { src: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1200&auto=format&fit=crop", alt: "Nutrition support – Ethiopian children" },
 ];
 
 export default function Stories() {

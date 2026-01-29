@@ -34,7 +34,7 @@ export default function MissionVision() {
             <div className="absolute top-0 right-0 p-8 opacity-5 text-9xl font-bold font-serif">M</div>
             <h2 className="text-3xl font-bold text-charcoal mb-6 relative z-10">{t("our_mission_title")}</h2>
             <p className="text-zinc-600 text-lg leading-relaxed relative z-10">
-              We work in partnership to mobilize and utilize services and resources that empower women, girls, and children. Our mission is to strengthen systems and build the capacity of actors who transform culture, society, and institutions, ensuring gender justice, women’s rights, and sustainable development.
+              {t("mission_text")}
             </p>
           </motion.section>
 
@@ -48,10 +48,32 @@ export default function MissionVision() {
             <div className="absolute top-0 right-0 p-8 opacity-5 text-9xl font-bold font-serif">V</div>
             <h2 className="text-3xl font-bold text-charcoal mb-6 relative z-10">{t("our_vision_title")}</h2>
             <p className="text-zinc-600 text-lg leading-relaxed relative z-10">
-              Our vision is a world where women and girls equally engage in, access, and benefit from all development initiatives and services. We aspire to build cultures, societies, and institutions where gender justice is upheld and women’s rights are fully ensured.
+              {t("vision_text")}
             </p>
           </motion.section>
         </div>
+
+        {/* Wos Gebeya – marketplace supporting mothers & girls */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 glass-card p-8 md:p-10 border-t-4 border-primary relative overflow-hidden"
+        >
+          <h3 className="text-2xl font-bold text-charcoal mb-4 relative z-10">{t("wos_gebeya_heading")}</h3>
+          <p className="text-zinc-600 text-lg leading-relaxed mb-6 relative z-10">
+            {t("wos_gebeya_desc")}
+          </p>
+          <a
+            href="https://wosgebeya.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20"
+          >
+            {t("wos_gebeya_cta")}
+            <span aria-hidden>→</span>
+          </a>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
