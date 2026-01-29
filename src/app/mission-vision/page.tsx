@@ -8,7 +8,7 @@ export default function MissionVision() {
     <div className="overflow-hidden">
       {/* Hero */}
       <section className="relative py-24 bg-gradient-to-br from-charcoal to-black text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1594708767771-a7502209ff51?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" />
+        <div className="absolute inset-0 opacity-25 bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrj84xAso4YPgUdTf_CKrFdIRDHxT-zE8yHQ&s')] bg-cover bg-center" />
         <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}

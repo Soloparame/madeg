@@ -142,8 +142,18 @@ export default function Home() {
             <span className="text-primary font-bold tracking-widest uppercase text-sm">Our Impact</span>
             <h2 className="text-2xl md:text-3xl font-extrabold text-white mt-2">Stories from the Children&apos;s Growing Center</h2>
           </div>
-          <div className="relative max-w-4xl mx-auto">
-            <div className="relative aspect-[2/1] max-h-[380px] rounded-2xl overflow-hidden shadow-2xl ring-2 ring-white/10">
+          <div className="relative max-w-4xl mx-auto flex items-center gap-2 md:gap-4">
+            {/* Prev – outside image area */}
+            <button
+              type="button"
+              onClick={() => setCarouselIndex((i) => (i - 1 + CAROUSEL_SLIDES) % CAROUSEL_SLIDES)}
+              className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 text-charcoal shadow-lg flex items-center justify-center hover:bg-white transition-colors z-20"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            {/* Image area – fixed aspect, centered content */}
+            <div className="relative flex-1 min-w-0 aspect-[16/9] max-h-[320px] md:max-h-[380px] rounded-2xl overflow-hidden shadow-2xl ring-2 ring-white/10">
               <AnimatePresence mode="wait">
                 {Array.from({ length: CAROUSEL_SLIDES }).map((_, i) =>
                   i === carouselIndex ? (
@@ -159,12 +169,12 @@ export default function Home() {
                         <img
                           src={`/carousel/carousel-${i + 1}.png`}
                           alt=""
-                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                          className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                       </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-left">
-                        <p className="text-white/95 text-sm md:text-base leading-relaxed max-w-3xl drop-shadow-lg">
+                      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-left">
+                        <p className="text-white/95 text-sm md:text-base leading-relaxed max-w-2xl drop-shadow-lg">
                           {t(CAROUSEL_KEYS[i])}
                         </p>
                       </div>
@@ -173,35 +183,28 @@ export default function Home() {
                 )}
               </AnimatePresence>
             </div>
-            <button
-              type="button"
-              onClick={() => setCarouselIndex((i) => (i - 1 + CAROUSEL_SLIDES) % CAROUSEL_SLIDES)}
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-charcoal shadow-lg flex items-center justify-center hover:bg-white transition-colors z-20"
-              aria-label="Previous slide"
-            >
-              <ChevronLeft size={24} />
-            </button>
+            {/* Next – outside image area */}
             <button
               type="button"
               onClick={() => setCarouselIndex((i) => (i + 1) % CAROUSEL_SLIDES)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-charcoal shadow-lg flex items-center justify-center hover:bg-white transition-colors z-20"
+              className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 text-charcoal shadow-lg flex items-center justify-center hover:bg-white transition-colors z-20"
               aria-label="Next slide"
             >
               <ChevronRight size={24} />
             </button>
-            <div className="flex justify-center gap-2 mt-4">
-              {Array.from({ length: CAROUSEL_SLIDES }).map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setCarouselIndex(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    i === carouselIndex ? "w-8 bg-primary" : "w-2 bg-white/50 hover:bg-white/70"
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
-            </div>
+          </div>
+          <div className="flex justify-center gap-2 mt-4">
+            {Array.from({ length: CAROUSEL_SLIDES }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setCarouselIndex(i)}
+                className={`h-2 rounded-full transition-all ${
+                  i === carouselIndex ? "w-8 bg-primary" : "w-2 bg-white/50 hover:bg-white/70"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>

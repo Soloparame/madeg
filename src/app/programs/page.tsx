@@ -30,13 +30,13 @@ export default function Programs() {
       title: t("food_nutrition"),
       desc: t("food_nutrition_desc"),
       gradient: "from-green-400 to-emerald-600",
-      img: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=600"
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrj84xAso4YPgUdTf_CKrFdIRDHxT-zE8yHQ&s"
     },
     {
       title: t("emergency_response"),
       desc: t("emergency_response_desc"),
       gradient: "from-red-400 to-rose-600",
-      img: "https://images.unsplash.com/photo-1526485859344-7f15b49774e0?auto=format&fit=crop&q=80&w=600"
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF5A4I5EQpY0Jf-OyUjvAWp5h1GlQtgvtBiw&s"
     },
   ];
   return (

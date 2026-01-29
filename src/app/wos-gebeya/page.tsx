@@ -10,7 +10,7 @@ export default function WosGebeyaPage() {
     <div className="overflow-hidden">
       {/* Hero */}
       <section className="relative py-24 bg-gradient-to-br from-charcoal to-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2000')] bg-cover bg-center" />
+        <div className="absolute inset-0 opacity-25 bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs3D5K337443LY9cZS0N6mJQtfglKdhC8htA&s')] bg-cover bg-center" />
         <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
