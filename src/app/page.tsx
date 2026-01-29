@@ -252,9 +252,9 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { title: t("healthcare"), img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600", desc: t("program_desc").replace("{program}", "healthcare") },
-              { title: t("skills"), img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600", desc: t("skills_desc") },
-              { title: t("nutrition"), img: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=600", desc: t("program_desc").replace("{program}", "nutrition") },
-              { title: t("emergency"), img: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=600", desc: t("program_desc").replace("{program}", "emergency") },
+              { title: t("skills"), img: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTs3D5K337443LY9cZS0N6mJQtfglKdhC8htA&s=", desc: t("skills_desc") },
+              { title: t("nutrition"), img: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRrj84xAso4YPgUdTf_CKrFdIRDHxT-zE8yHQ&s=", desc: t("program_desc").replace("{program}", "nutrition") },
+              { title: t("emergency"), img: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTF5A4I5EQpY0Jf-OyUjvAWp5h1GlQtgvtBiw&s=", desc: t("program_desc").replace("{program}", "emergency") },
             ].map((prog, idx) => (
               <motion.div
                 key={idx}
