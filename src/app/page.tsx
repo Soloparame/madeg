@@ -27,7 +27,6 @@ const CAROUSEL_KEYS = ["carousel_caption_1", "carousel_caption_2", "carousel_cap
 
 export default function Home() {
   const { t } = useI18n();
-  const [videoError, setVideoError] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
 
   useEffect(() => {
@@ -87,28 +86,18 @@ export default function Home() {
             >
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shadow-primary/20">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
-                {/* Hero video – add your video file as public/hero-video.mp4 (or .webm) */}
-                {!videoError ? (
-                  <video
-                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    poster={HERO_POSTER}
-                    aria-label="MADEG empowering women and children"
-                    onError={() => setVideoError(true)}
-                  >
-                    <source src="/hero-video.mp4" type="video/mp4" />
-                    <source src="/hero-video.webm" type="video/webm" />
-                  </video>
-                ) : (
-                  <img
-                    src={HERO_POSTER}
-                    alt="Ethiopian children smiling"
-                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                  />
-                )}
+                <video
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster={HERO_POSTER}
+                >
+                  <source src="/hero-video.mp4" type="video/mp4" />
+                  <source src="/hero-video.MP4" type="video/mp4" />
+                </video>
               </div>
 
               {/* Floating Card */}
